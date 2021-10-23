@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-__version__ = "0.2021.10.22"
-#__version__ = "0.2021.10.22"
+__version__ = "0.2021.10.22.rev2"
+#__version__ = "0.2021.10.22.rev2"
 ##Honeycomb macro -- creates a feature python parametric honeycomb object for Part Design workbench
 ##2021, by <TheMarkster> LGPL2.1 or later
 #import FreeCAD, FreeCADGui, Part
@@ -154,6 +154,11 @@ __version__ = "0.2021.10.22"
 #        pass
 #
 #    def onDelete(self, vobj, subelements):
+#        if hasattr(vobj.Object,"_Body") and vobj.Object._Body: #do this only when the object is in a PD body
+#            #need to ensure the next feature in the tree's BaseFeature property points to our BaseFeature
+#            solids = [feat for feat in vobj.Object._Body.Group if feat.isDerivedFrom("PartDesign::Feature") and feat.BaseFeature == vobj.Object]
+#            if len(solids) == 1: #found previous solid feature
+#                solids[0].BaseFeature = vobj.Object.BaseFeature
 #        return True
 #
 #    def getIcon(self):
