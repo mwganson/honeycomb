@@ -4,6 +4,9 @@ Honeycomb macro for FreeCAD, creates parametric honeycomb feature python object 
 <img src="honeycomb_scr1.png" alt="screenshot1 showing elliptical border"><br/>
 <br/>
 <img src="honeycomb_scr2.png" alt="screeenshot2 showing rectangular border"><br/>
+<br/>
+<a href="https://forum.freecadweb.org/viewtopic.php?f=3&t=63811">How to wrap honeycomb around a cylinder example</a><br/>
+<br/>
 
 ## Toolbar Icon
 <img src="Honeycomb.svg"> <a href="Honeycomb.svg">Download</a> the toolbar Icon.<br/>
