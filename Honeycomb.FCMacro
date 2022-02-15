@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-__version__ = "0.2021.10.22.rev2"
-#__version__ = "0.2021.10.22.rev2"
+__version__ = "0.2022.02.14"
+#__version__ = "0.2022.02.14"
 ##Honeycomb macro -- creates a feature python parametric honeycomb object for Part Design workbench
 ##2021, by <TheMarkster> LGPL2.1 or later
 #import FreeCAD, FreeCADGui, Part
@@ -17,16 +17,31 @@ __version__ = "0.2021.10.22.rev2"
 #        obj.addProperty("App::PropertyFloatConstraint","YAdjust","Honeycomb","Adjust hexagons in the Y direction").YAdjust = (0,-10e4,10e4,.1)
 #        obj.addProperty("App::PropertyFloat","BorderOffset","Honeycomb","Offset for border (0 = no border) -1 for inward offset").BorderOffset = 1
 #        obj.addProperty("App::PropertyFloatConstraint","BorderHeightOffset","Honeycomb","Height Offset for border (0 = same as Height)").BorderHeightOffset = (0.1,-10e4,10e4,.1)
+#        obj.addProperty("App::PropertyLink","Profile","Honeycomb","Profile, e.g. sketch, to use in place of hexagon, should have radius = 1, centered on origin")
+#        obj.addProperty("App::PropertyInteger","CountXAdjust","Honeycomb","default: 0 -- amount to add to number of hexagons on X axis")
+#        obj.addProperty("App::PropertyInteger","CountYAdjust","Honeycomb","default: 0 -- amount to add to number of hexagons on Y axis")
 #        obj.setEditorMode("Placement",0)
 #        obj.Proxy = self
+#        self.fpName = obj.Name
 #
 #    def makeHexagon(self,radius,origin):
-#        '''makes a hexagon based on radius and origin, returns it as a wire'''
-#        sin60 = 0.8660254037844386
-#        tups = [(-1,0,0),(-.5,sin60,0),(.5,sin60,0),(1,0,0),(.5,-sin60,0),(-.5,-sin60,0),(-1,0,0)]
-#        pts = [FreeCAD.Vector(tup).add(origin) for tup in tups]
-#        poly = Part.makePolygon(pts).scale(radius,origin)
-#        return poly
+#        '''makes a hexagon based on radius and origin, returns it as a wire
+#        unless a profile is linked to Profile property'''
+#        fp = FreeCAD.ActiveDocument.getObject(self.fpName)
+#        if hasattr(fp,"Profile") and fp.Profile:
+#            profile = fp.Profile
+#            if not hasattr(profile,"Shape"):
+#                raise Exception("Invalid profile\n")
+#            shp = profile.Shape.copy()
+#            shp.Placement.move(origin)
+#            shp.scale(radius,origin)
+#            return shp
+#        else:
+#            sin60 = 0.8660254037844386
+#            tups = [(-1,0,0),(-.5,sin60,0),(.5,sin60,0),(1,0,0),(.5,-sin60,0),(-.5,-sin60,0),(-1,0,0)]
+#            pts = [FreeCAD.Vector(tup).add(origin) for tup in tups]
+#            poly = Part.makePolygon(pts).scale(radius,origin)
+#            return poly
 #
 #    def makeHoneycomb(self,fp):
 #        tan15 = 0.2679491924311227
@@ -39,6 +54,9 @@ __version__ = "0.2021.10.22.rev2"
 #        firstY = fp.Radius
 #        countX = round(fp.Width/xInt) + 1
 #        countY = round(fp.Length/yInt) + 1
+#        if hasattr(fp,"CountXAdjust"):
+#            countX += fp.CountXAdjust
+#            countY += fp.CountYAdjust
 #        vectors = []
 #        for xx in range(-1,int(countX)):
 #            for yy in range(-1,int(countY)):
@@ -488,6 +506,11 @@ def makeObject(HC):
     else:
         Honeycomb(fp)
         HoneycombVP(fp.ViewObject)
+    selx = FreeCADGui.Selection.getSelection()
+    if selx:
+        profile = selx[0]
+        if hasattr(profile,"Shape"):
+            fp.Profile = profile
     body=FreeCADGui.ActiveDocument.ActiveView.getActiveObject("pdbody")
     if body:
         body.addObject(fp)
