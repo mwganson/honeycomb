@@ -27,12 +27,16 @@ In this section are the properties related to the Honeycomb objects.
 Default: 0.1 (mm).  This defines the height of the border, if any.  It is added to the Height property.  If this is zero, then the border height is the same as the grid height.  This is included because for some reason the Refine property doesn't remove all the extraneous edges, so by setting the border height slightly higher we get a better appearance.  Note: in all cases the bottom of the border will be at the same z-coordinate as the grid, so if you are 3D printing there will be no need for support if that side is down.
 #### Border Offset (float)
 Default 1.0, which creates a border and offsets it 1mm from the grid.  Set this to zero if you do not want a border.  Set it to a negative value if you want the border to offset inwards.
+#### CountXAdjust, CountYAdjust (integer)
+Default: 0.  Can be used to adjust the number of rows/columns if you need more or fewer. (New to version 0.2022.02.14.)
 #### Elliptical Grid (boolean)
 Default: True.  If True, and if Border Offset is not zero, you get an oval-shaped elliptical border.  If False you get a rectangular border.  The Width and Height properties of the rectangular grid pull double duty as major and minor diameters of the oval grids.
 #### Height (float)
 Default: 3mm.  The extruded height of the grid on the z-axis.
 #### Length (float)
 Default: 10 (mm).  This is the size of the grid on the y-axis. It is the minor/major diameter for oval-shaped elliptical grids and the length of rectangular grids.
+#### Profile (Link)
+You can link a sketch to this property to replace the default hexagon with a different profile.  For example, a circle centered in the sketch of radius 1mm if you want a circle instead of a hexagon.  (New to version 0.2022.02.14)
 #### Radius (float)
 Default 1 (mm).   This is the circumradius of the individual hexagons that make up the grid.  The larger the circumradius the fewer hexagons are needed for a given size, and the better the performance of your PC.  It is a good idea to set this temporarily to a higher value during modeling, and then setting to the final value as the last step for improved efficiency / productivity.
 #### Separation (float)
@@ -45,15 +49,9 @@ Default: 0.  These can be used to adjust the hexagons within the grid, for examp
 
 
 
-
-
-
-
-
-
-
-
 #### Changelog
+##### 0.2022.02.14
+Add Profile property, CountXAdjust, CountYAdjust properties.
 ##### 0.2021.10.22.rev2
 Ensure on deletion the next feature in the Part Design body has its BaseFeature correctly reassigned to the object now in front of it.
 ##### 0.2021.10.22
