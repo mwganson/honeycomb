@@ -50,6 +50,11 @@ Default: 0.  These can be used to adjust the hexagons within the grid, for examp
 
 
 #### Changelog
+##### 0.2024.07.24
+Migrate to .py file instead of .FCMacro
+Add option to use a square grid
+No longer add Profile automatically using selected object
+No longer make PartDesign::FeaturePython object unless there is an active body
 ##### 0.2022.02.14
 Add Profile property, CountXAdjust, CountYAdjust properties.
 ##### 0.2021.10.22.rev2
