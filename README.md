@@ -50,6 +50,8 @@ Default: 0.  These can be used to adjust the hexagons within the grid, for examp
 
 
 #### Changelog
+##### 0.2024.07.26
+Change SquareGrid default to False because users will expect to see a honeycomb gride on startup
 ##### 0.2024.07.24
 Migrate to .py file instead of .FCMacro
 Add option to use a square grid
