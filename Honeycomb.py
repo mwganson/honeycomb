@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__version__ = "0.2024.07.24"
+__version__ = "0.2024.07.26"
 
 #Honeycomb macro -- creates a feature python parametric honeycomb object for Part Design workbench
 #2021, by <TheMarkster> LGPL2.1 or later
@@ -21,7 +21,7 @@ class Honeycomb:
         obj.addProperty("App::PropertyInteger","CountXAdjust","Honeycomb","default: 0 -- amount to add to number of hexagons on X axis")
         obj.addProperty("App::PropertyInteger","CountYAdjust","Honeycomb","default: 0 -- amount to add to number of hexagons on Y axis")
         obj.addProperty("App::PropertyString","Version","Honeycomb","Version of macro this object was created with").Version = __version__
-        obj.addProperty("App::PropertyBool","SquareGrid","Honeycomb","If true, make a square grid instead of hexagon grid").SquareGrid = True
+        obj.addProperty("App::PropertyBool","SquareGrid","Honeycomb","If true, make a square grid instead of hexagon grid").SquareGrid = False
         obj.setEditorMode("Placement",0)
         obj.Proxy = self
         self.fpName = obj.Name
