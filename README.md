@@ -50,6 +50,8 @@ Default: 0.  These can be used to adjust the hexagons within the grid, for examp
 
 
 #### Changelog
+##### 0.2024.08.27
+Add SquareGrid property to legacy objects
 ##### 0.2024.07.26
 Change SquareGrid default to False because users will expect to see a honeycomb gride on startup
 ##### 0.2024.07.24
