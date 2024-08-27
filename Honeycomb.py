@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__version__ = "0.2024.07.26"
+__version__ = "0.2024.08.27"
 
 #Honeycomb macro -- creates a feature python parametric honeycomb object for Part Design workbench
 #2021, by <TheMarkster> LGPL2.1 or later
@@ -179,6 +179,8 @@ class Honeycomb:
                 return fuse
 
     def execute(self,fp):
+        if not hasattr(fp, "SquareGrid"):
+            fp.addProperty("App::PropertyBool","SquareGrid","Honeycomb","Whether to make honeycomb grid or square grid").SquareGrid = False
         shape = self.makeHoneycomb(fp) if not fp.SquareGrid else self.makeCrossGrid(fp)
         fp.positionBySupport()
         shape.Placement = fp.Placement
